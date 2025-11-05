@@ -776,6 +776,9 @@ ssize_t elv_iosched_store(struct request_queue *q, const char *name,
 {
 	int ret;
 
+	/* prevents changing I/O scheduler from userspace */
+	return -EPERM;
+
 	if (!elv_support_iosched(q))
 		return count;
 
