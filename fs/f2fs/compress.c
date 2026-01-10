@@ -2716,6 +2716,9 @@ void f2fs_cache_compressed_page(struct f2fs_sb_info *sbi, struct page *page,
 
 	set_page_private_data(cpage, ino);
 
+	if (!f2fs_is_valid_blkaddr(sbi, blkaddr, DATA_GENERIC_ENHANCE_READ))
+		goto out;
+
 	copy_page(page_address(cpage), page_address(page));
 	SetPageUptodate(cpage);
 out:
